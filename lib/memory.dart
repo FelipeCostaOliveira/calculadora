@@ -1,6 +1,6 @@
 class Memory {
   static const operations = const ['%', '/', '+', '-', 'x', '='];
-  String _operation;
+  String? _operation;
   bool _usedOperation = false;
   final _buffer = [0.0, 0.0];
   int _bufferIndex = 0;
@@ -33,7 +33,7 @@ class Memory {
 
   void _deleteEndDigit() {
     result = result.length > 1 ? result.substring(0, result.length - 1) : '0';
-    _buffer[_bufferIndex] = double.tryParse(result);
+    _buffer[_bufferIndex] = double.tryParse(result) ?? 0.0;
   }
 
   void _addDigit(String digit) {
@@ -44,7 +44,7 @@ class Memory {
 
     result += digit;
 
-    _buffer[_bufferIndex] = double.tryParse(result);
+    _buffer[_bufferIndex] = double.tryParse(result) ?? 0.0;
     _usedOperation = false;
   }
 
@@ -54,14 +54,12 @@ class Memory {
     if (_bufferIndex == 0) {
       _bufferIndex = 1;
 
-      if (operation == '=') 
-        _operation = operation;
+      if (operation == '=') _operation = operation;
     } else {
       _buffer[0] = _calculate();
     }
 
-    if (operation != '=') 
-      _operation = operation;
+    if (operation != '=') _operation = operation;
 
     result = _buffer[0].toString();
     result = result.endsWith('.0') ? result.split('.')[0] : result;
