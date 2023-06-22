@@ -60,12 +60,12 @@ class _CalculatorState extends State<Calculator> {
   }
 
   Widget _buildKeyboardButton(String label,
-      {int flex = 1, Color textColor = Colors.white, Color backgroundColor = Colors.black}) {
+      {int flex = 1,
+      Color textColor = Colors.white,
+      Color backgroundColor = Colors.black}) {
     return Expanded(
       flex: flex,
-      child: RaisedButton(
-        color: backgroundColor,
-        textColor: textColor,
+      child: ElevatedButton(
         child: Text(
           label,
           style: TextStyle(fontSize: 24),
